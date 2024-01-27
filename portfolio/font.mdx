@@ -1,0 +1,59 @@
+---
+slug: font
+title: Font
+description: This website uses a font I created! (It's a variable font that can slide continuously between sans and serif)
+image: /images/font/font.jpg
+# Using this mostly for ordering
+date: 2023-10-01
+tags: [Design]
+# image:
+toc_max_heading_level: 4
+---
+
+<!-- Inline table of contents -->
+import TOCInline from '@theme/TOCInline';
+
+<details className="table_of_contents">
+    <summary><strong>Table of Contents</strong></summary>
+    <TOCInline toc={toc} maxHeadingLevel={4} />
+</details>
+
+This website uses a font I created! It's a [variable font](https://fonts.google.com/knowledge/introducing_type/introducing_variable_fonts) that can slide continuously between <span class="sans">sans</span> and <span class="serif">serif</span>. 
+
+<!-- Images -->
+import liam_hale_font from '/images/font/liam_hale_font.gif'
+import liam_hale_logo from '/images/font/liam_hale_logo.jpg'
+
+<div className="image_wrapper">
+    <img src={liam_hale_font} />
+    <figcaption>
+    </figcaption>
+</div>
+
+<!-- truncate -->
+
+Try moving the slider at the top of the page (open the menu if you're on mobile) and watch the text change.
+
+I make music (see [Songwriting](/songwriting)) under the name Liam Hale, and I designed a logo for it:
+
+<div className="image_wrapper">
+    <img src={liam_hale_logo} />
+    <figcaption>
+    </figcaption>
+</div>
+
+This logo uses contrasting colors and sans vs. serif to capture dualities that I try to express through my music:
+- young ⇄ old
+- modern ⇄ classical
+- dark ⇄ light
+- yin ⇄ yang
+
+So I decided to expand on this concept and design a new font (called &ldquo;Liam Hale&rdquo;). Because it's a variable font, it isn't limited to expressing duality: it can vary continuously along the sans ⇄ serif axis. 
+
+If you're curious, here are some more details:
+- I designed the font using [Glyphs](https://glyphsapp.com/).
+- I was inspired by the Baskerville font (one of my favorites!) and used that as the starting point for the serif master.
+- I created a custom axis called `SRIF` that takes values between `0` (fully sans) and `1000` (fully serif). These correspond to the two different masters, sans and serif. (Variable fonts work by interpolating across multiple masters.)
+- Each glyph has exactly the same kerning in each master, so that they don't shift around when the value of `SRIF` changes.
+- I only designed a core set of glyphs (lowercase and uppercase letters, numbers, and basic symbols and punctuation), so the font won't work for all kinds of text. (I'd love to design more glyphs eventually, but it's _incredibly_ tedious to do so. Designing this many took me many tens of hours.)
+- I did _not_ create masters for **bold** and _italic_ styles, and yet to my surprise the font shows up reasonably well in **bold** and _italic_ form on this website! I [learned](https://forum.glyphsapp.com/t/bizarre-variable-font-behavior-both-locally-and-on-the-web/28159/8) that this is because web browsers try to generate bold and italic styles when they don't exist — by literally shifting, overlaying, and angling the other masters. 

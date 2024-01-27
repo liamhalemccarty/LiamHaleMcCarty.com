@@ -1,0 +1,220 @@
+---
+slug: ainonymous
+title: Ainonymous
+description: A giant inflatable gray avatar — performance art piece exploring identity and anonymity in an age of AI
+# image: 
+# Using this mostly for ordering
+# date: 2023-10-01
+tags: [Art, Sculpture, Technology, Politics, Activism]
+# image:
+toc_max_heading_level: 4
+draft: true
+---
+
+<!-- Inline table of contents -->
+import TOCInline from '@theme/TOCInline';
+
+<details className="table_of_contents">
+    <summary><strong>Table of Contents</strong></summary>
+    <TOCInline toc={toc} maxHeadingLevel={4} />
+</details>
+
+Ainonymous will be a giant, gray, inflatable avatar that people can stand inside of. I need to calculate its dimensions.
+
+
+## Setup
+
+The avatar will be structured as a sphere intersecting with a dome. 
+
+
+## Definitions
+
+There are three parameters:
+- $r_d$: radius of the dome
+- $r_s$: radius of the sphere
+- $d$: distance between the midpoint of the dome bottom and the sphere center
+
+
+## Calculations
+
+From the parameters above, I can calulate some more:
+- $h$: height of the avatar
+
+$$
+h = d + r_s
+$$
+
+- $g$: gap diameter (the gap is a circle)
+
+$$
+g = 2\sqrt{r_s^2 - \left(\frac{r_s^2 - r_d^2 + d^2}{2d}\right)^2}
+$$
+
+<details>
+<summary>Derivation</summary>
+
+First, I define $a$ and $b$ as the lengths along the line connecting the midpoint of the dome bottom and the sphere center such that 
+$$
+a + b = d.
+$$ 
+Then, there are two right triangles such that
+$$
+\begin{align}
+    \left(\frac{g}{2}\right)^2 &= r_d^2 - a^2 
+    \\
+    &= r_s^2 - b^2.
+\end{align}
+$$
+Substituting $a = d - b$,
+$$
+\begin{align}
+    r_d^2 - (d - b)^2 &= r_d^2 - d^2 + 2bd - b^2 
+    \\
+    &= r_s^2 - b^2,
+    \\
+\end{align}
+$$
+and therefore
+$$
+b = \frac{r_s^2 - r_d^2 + d^2}{2d}.
+$$
+And now I can find $g$
+$$
+\begin{align}
+    \left(\frac{g}{2}\right)^2 &= r_s^2 - b^2
+    \\
+    &= r_s^2 - \left(\frac{r_s^2 - r_d^2 + d^2}{2d}\right)^2.
+\end{align}
+$$
+Simplifying, I arrive at
+$$
+g = 2\sqrt{r_s^2 - \left(\frac{r_s^2 - r_d^2 + d^2}{2d}\right)^2}.
+$$
+
+</details>
+
+---
+
+```jsx live
+function calculateGap() {
+    const r1 = 4.5;
+    const r2 = 2.25;
+    const d = 5.75;
+    const g = 2 * Math.sqrt(r2**2 - ((r2**2 - r1**2 + d**2) / (2 * d))**2);
+    return (
+        <div>g = {g.toFixed(2)}</div>
+    )
+}
+```
+
+```jsx live
+function calculate() {
+    // PARAMETERS
+    // r1: radius of bottom sphere
+    const r1 = 4.5;
+    // r2: radius of top sphere
+    const r2 = 2.25;
+    // n1: number of gores for bottom sphere
+    const n1 = 8;
+    // n2: number of gores for top sphere
+    const n2 = 8;
+    // d: distance between centers of spheres
+    const d = 5.75;
+
+    // CALCULATIONS
+    // c1: circumference of bottom sphere
+    const c1 = 2 * Math.PI * r1;
+    // c2: circumference of top sphere
+    const c2 = 2 * Math.PI * r2;
+    // h: height of avatar
+    const h = d + r2;
+    // g: diameter of circular gap created by spheres intersecting
+    const g = 2 * Math.sqrt(r2**2 - ((r2**2 - r1**2 + d**2) / (2 * d))**2);
+    // W1: max width of gore for bottom sphere
+    const W1 = c1 / n1;
+    // W2: max width of gore for top sphere
+    const W2 = c2 / n2;
+    // θ1: angle between vertical and line through sphere intersection, relative to center of bottom sphere
+    const θ1 = Math.asin((g / 2) / r1);
+    // θ2: angle between vertical and line through sphere intersection, relative to center of top sphere
+    const θ2 = Math.asin((g / 2) / r2);
+    // h1: height of gore for bottom sphere dome
+    const h1 = (c1 / 4) - ((θ1 / (2 * Math.PI)) * c1);
+    // h2: height of gore for top sphere
+    const h2 = (c2 / 2) - ((θ2 / (2 * Math.PI)) * c2);
+    // gc: gap circumference
+    const gc = g * Math.PI
+    // w1: min width of gore for bottom sphere
+    const w1 = gc / n1;
+    // w2: min width of gore for top sphere
+    const w2 = gc / n2;
+
+    // CONSTRAINTS
+    // height > 7
+    var height = (h > 7) ? true : false;
+
+    return (
+        <div>
+            <div>If:</div>
+            <div>
+                <ul>
+                    <li>r1 = {r1}</li>
+                    <li>r2 = {r2}</li>
+                    <li>d = {d}</li>
+                </ul>
+            </div>
+            <div>Then:</div>
+            <div>
+                <ul>
+                    <li>c1 = {c1.toFixed(2)}</li>
+                    <li>c2 = {c2.toFixed(2)}</li>
+                    <li>h = {h}</li>
+                    <li>height over 7? = {height.toString()}</li>
+                    <li>g = {g.toFixed(2)}</li>
+                    <li>W1 = {W1.toFixed(2)}</li>
+                    <li>W2 = {W2.toFixed(2)}</li>
+                    <li>θ1 = {θ1.toFixed(2)}</li>
+                    <li>θ2 = {θ2.toFixed(2)}</li>
+                    <li>h1 = {h1.toFixed(2)}</li>
+                    <li>h2 = {h2.toFixed(2)}</li>
+                    <li>w1 = {w1.toFixed(2)}</li>
+                    <li>w2 = {w2.toFixed(2)}</li>
+                </ul>
+            </div>
+        </div>
+    )
+}
+```
+
+$a = b$
+
+<span class="math math-inline">
+    <span class="katex">
+        <span class="katex-mathml">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                    <mrow>
+                        <mi>a</mi>
+                        <mo>=</mo>
+                        <mi>b</mi>
+                    </mrow>
+                    <annotation encoding="application/x-tex">a = b</annotation>
+                </semantics>
+            </math>
+        </span>
+        <span class="katex-html" aria-hidden="true">
+            <span class="base">
+                <span class="strut" style={{height: 0.4306 + "em"}}></span>
+                <span class="mord mathnormal">a</span>
+                <span class="mspace" style={{marginRight: 0.2778 + "em"}}></span>
+                <span class="mrel">=</span>
+                <span class="mspace" style={{marginRight: 0.2778 + "em"}}></span>
+            </span>
+            <span class="base">
+                <span class="strut" style={{height: 0.6944 + "em"}}></span>
+                <span class="mord mathnormal">b</span>
+            </span>
+        </span>
+    </span>
+</span>
+

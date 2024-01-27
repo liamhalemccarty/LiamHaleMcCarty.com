@@ -1,0 +1,409 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+ 
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+
+@font-face {
+  font-family: 'Liam Hale';
+  src: url('/static/fonts/LiamHaleVF.woff2') format('woff2');
+  /* Use these if you want to disable the browser generated "bold" and "italic" versions of the Liam Hale font */
+  /* font-weight: 100 900;
+  font-style: oblique -90deg 90deg; */
+}
+
+#huge-text-test {
+  font-size: 10rem;
+  line-height: 12rem;
+}
+
+/* You can override the default Infima variables here. */
+:root {
+  /* COLORS */
+  --ifm-color-primary: #0dbc3d;
+  --ifm-color-primary-dark: #0ca937;
+  --ifm-color-primary-darker: #0ba034;
+  --ifm-color-primary-darkest: #09842b;
+  --ifm-color-primary-light: #0ecf43;
+  --ifm-color-primary-lighter: #0fd846;
+  --ifm-color-primary-lightest: #16ef52;
+  --ifm-color-success: #0dbc3d;
+  --ifm-code-font-size: 85%;
+
+  /* FONTS */
+  /* The font I used before I made my own Liam Hale font */
+  /* --ifm-font-family-base: 'Titillium Web'; */
+  --ifm-font-family-base: 'Liam Hale';
+  --ifm-font-size-base: 120%;
+  --ifm-blockquote-font-size: 100%;
+}
+
+/* To hide checkboxes for filters on Showcase page */
+.screen-reader-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: polygon(0 0, 0 0, 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+/* Sets the default variable font settings, changable using the slider (range input) */
+body {
+  font-variation-settings: "SRIF" 0;
+}
+/* Variable font slider */
+#variable-font-slider {
+  width: 13.4rem; /* A hack to keep the labels, slider, and info tooltip icon horizontally aligned */
+}
+#sans-to-serif {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 0.33rem; /* Specified height */
+  border-radius: 1rem;
+  background-color: var(--ifm-color-gray-500); /* Grey background */
+  outline: none; /* Remove outline */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  margin: 0 0.5rem;
+  opacity: 1;
+}
+/* Mouse-over effects */
+#sans-to-serif:hover {
+  opacity: 1;
+}
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#sans-to-serif::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 1.5rem; /* Set a specific slider handle width */
+  height: 1.5rem; /* Slider handle height */
+  border-radius: 1rem;
+  cursor: pointer; /* Cursor on hover */
+  background-image: url("/images/logo/liamhale.svg");
+  background-size: cover;
+  opacity: 1; 
+}
+#sans-to-serif::-moz-range-thumb {
+  width: 1.5rem; /* Set a specific slider handle width */
+  height: 1.5rem; /* Slider handle height */
+  border-radius: 1rem;
+  cursor: pointer; /* Cursor on hover */
+  background-image: url("/images/logo/liamhale.svg");
+  background-size: cover;
+}
+#sans-to-serif::-moz-range-track {
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+}
+.sans {
+  font-variation-settings: "SRIF" 0;
+}
+.serif {
+  font-variation-settings: "SRIF" 1000;
+}
+#sans-label {
+  font-variation-settings: "SRIF" 0;
+  font-size: 0.8rem;
+}
+#serif-label {
+  font-variation-settings: "SRIF" 1000;
+  font-size: 0.8rem;
+}
+/* Tooltip for variable font slider info button */
+.tooltip {
+  position: relative;
+  display: inline-flex; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: var(--ifm-color-gray-600);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  cursor: pointer; /* Cursor on hover */
+  margin: 0 0.5rem;
+}
+.tooltip .tooltip-text {
+  visibility: hidden;
+  background-color: var(--ifm-color-gray-600);
+  /* color: #fff; */
+  text-align: center;
+  border-radius: 0.5rem;
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -10rem;
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip-text {
+  font-size: small;
+  width: 10rem;
+  padding: 0.5rem;
+}
+.tooltip:hover {
+  background-color: var(--ifm-color-gray-800);
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Hack to create a (bad version of) line wraps */
+/* .prism-code > code {
+  white-space : pre-wrap;
+} */
+
+/* ANNOUNCEMENT BAR */
+div[class^='announcementBarContent'] {
+  background-color: #0dbc3d !important;
+  padding: 0 !important;
+}
+div[class^='announcementBarContent'] > a {
+  color: white !important;
+  text-decoration: underline !important;
+}
+
+/* Hide table of contents <details> component on desktop (since it already shows on the right side, unlike on mobile) */
+.table_of_contents {
+  display: none;
+}
+
+/* EQUATIONS */
+/* Horizontal scrolling */
+.katex-display { overflow: auto hidden }
+/* Line wrap: second line adds space between broken lines; third line compensatesby reducing space around display math */
+/* .katex-display > .katex { white-space: normal }
+.katex-display > .base { margin: 0.25em 0 }
+.katex-display { margin: 0.5em 0; } */
+/* Font size: default is 1.2em */
+.katex { font-size: 1em; }
+
+/* Set colors of "Note" admonition to same as default "Tip" one */
+.alert--secondary {
+  --ifm-alert-background-color: var(
+    --ifm-color-success-contrast-background
+    );
+  --ifm-alert-border-color: var(--ifm-color-success-dark);
+  --ifm-alert-foreground-color: var(
+    --ifm-color-success-contrast-foreground
+    )
+}
+/* Set colors of "Tip" admonition to same as default "Caution" one */
+.alert--success {
+  --ifm-alert-background-color: var(
+    --ifm-color-warning-contrast-background
+    );
+  --ifm-alert-border-color: var(--ifm-color-warning-dark);
+  --ifm-alert-foreground-color: var(
+    --ifm-color-warning-contrast-foreground
+    )
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme='dark'] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar__logo {
+  height: 2.5rem;
+  margin-right: 0.7rem;
+}
+.navbar__title {
+  font-size: x-large;
+  /* font-family: 'Baskerville'; */
+  /* font-weight: lighter; */
+}
+/* .navbar__items > .navbar__link, .navbar__item > .navbar__link {
+  font-weight: 700;
+}
+.navbar__items > .navbar__link {
+  background-color: var(--ifm-color-gray-700);
+  padding: var(--ifm-navbar-item-padding-vertical)
+  var(--ifm-navbar-item-padding-horizontal) calc(var(--ifm-navbar-item-padding-vertical) - 0.25rem);
+  color: white;
+  border-radius: 100px;
+}
+.navbar__items > .navbar__link:hover {
+  background-color: var(--ifm-color-black);
+} */
+.left-button-group {
+  margin-bottom: 1.5rem;
+}
+.get-updates-button, .about-button, .contact-me-button, .clear-all-button {
+  color: white;
+  border-radius: 100px;
+  font-weight: 700;
+  padding: var(--ifm-navbar-item-padding-vertical)
+  var(--ifm-navbar-item-padding-horizontal) calc(var(--ifm-navbar-item-padding-vertical) - 0.5rem);
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
+}
+.get-updates-button, .clear-all-button {
+  background-color: var(--ifm-link-color);
+}
+.about-button, .contact-me-button {
+  background-color: var(--ifm-color-gray-600);
+}
+.get-updates-button:hover, .clear-all-button:hover {
+  background-color: var(--ifm-color-primary-darkest);
+}
+.clear-all-button:hover {
+  cursor: pointer;
+}
+.contact-me-button:hover, .about-button:hover {
+  background-color: var(--ifm-color-gray-700);
+}
+.get-updates-button:hover, .about-button:hover, .contact-me-button:hover, .clear-all-button:hover {
+  color: white;
+  text-decoration: none;
+}
+h1, h2, h3, h4, h5 {
+  /* font-family: 'Baskerville'; */
+}
+h3, h4 {
+  /* font-weight: lighter; */
+}
+div[class^='sidebarItemTitle_node_modules-@docusaurus-theme-classic-lib-next-theme-BlogSidebar-styles-module'] {
+  /* font-family: 'Baskerville'; */
+}
+ul[class^='sidebarItemList_node_modules-@docusaurus-theme-classic-lib-next-theme-BlogSidebar-styles-module'] {
+  /* font-weight: 700; */
+}
+p {
+  /* font-weight: 300; */
+  /* font-size: larger; */
+  /* text-align: justify; */
+}
+time {
+  /* font-style: oblique; */
+  display: none;
+}
+#liam {
+  float: right;
+  width: 25%;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+figcaption {
+  font-size: 85%;
+}
+.subcaption {
+  font-size: 75%;
+}
+.video_embed_wrapper > figcaption, .document_file_wrapper > figcaption {
+  margin-top: 0.5rem;
+}
+.image_wrapper, .video_embed_wrapper, .video_file_wrapper, .audio_file_wrapper, .document_file_wrapper {
+  margin-bottom: 1rem;
+}
+/* For 16:9 aspect ratio (see here: https://faq.dailymotion.com/hc/en-us/articles/360022841393-How-to-preserve-the-player-aspect-ratio-on-a-responsive-page) */
+.video_embed {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+.video_embed > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* For 17:22 (i.e. 8.5:11) aspect ratio (see here: https://faq.dailymotion.com/hc/en-us/articles/360022841393-How-to-preserve-the-player-aspect-ratio-on-a-responsive-page) */
+.document_file {
+  position: relative;
+  padding-bottom: 129.41%;
+}
+.document_file > object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* BELOW FROM : https://docs.theochu.com/docusaurus/styling/ */
+/* Announcement Bar */
+div[class^='announcementBarContent'] {
+  background-color: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+}
+div[class^='announcementBarContent'] a {
+  color: var(--ifm-link-color);
+  text-decoration: inherit;
+}
+div[class^='announcementBarContent'] a:hover {
+  color: var(--ifm-link-color);
+  text-decoration: underline;
+}
+
+.blog-post-container {
+  max-width: calc(var(--ifm-container-width) + 200px);
+}
+
+/* MOBILE */
+@media (min-width: 1440px) {
+  /* Make blog posts wider */
+  .blog-post-container {
+      max-width: calc(var(--ifm-container-width-xl) + 200px);
+  }
+}
+/* 966px is the Docusaurus default cutoff: https://docusaurus.io/docs/styling-layout#mobile-view */
+@media screen and (max-width: 966px) {
+  .table_of_contents {
+    display: block;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #filters-header {
+    display: none;
+  }
+}
+@media only screen and (max-width: 480px) {
+  #variable-font-slider {
+    padding: calc(var(--ifm-navbar-item-padding-vertical) + 0.5rem)
+  var(--ifm-navbar-item-padding-horizontal);
+  }
+  #liam {
+    width: 80%;
+    float: none;
+    display: block;
+    margin: 0 auto 2rem auto;
+  }
+  .navbar__title {
+    font-size: large;
+  }
+  .clear-all-button {
+    display: none;
+  }
+}
+@media only screen and (max-width: 320px) {
+  :root {
+    --ifm-font-size-base: 100%;
+  }
+  .navbar__logo {
+    height: 2rem;
+    margin-right: 0.7rem;
+  }
+  .navbar__title {
+    font-size: medium;
+  }
+}
